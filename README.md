@@ -1,3 +1,6 @@
+![image] (./img/logo.jpg)
+
+
 ## kafka consumer 접속
 ```
 WORKSPACE=/workspace/team4
