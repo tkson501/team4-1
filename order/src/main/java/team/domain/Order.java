@@ -79,11 +79,9 @@ public class Order  {
         orderPlaced.publishAfterCommit();
 
         // Get request from Store
-        team.external.Store store =
-           OrderApplication.applicationContext.getBean(team.external.StoreService.class)
-           .getStore(getFlowerId());
-
-        if (store.getFlowerCnt() < getQty()) throw new RuntimeException("Out of stock!");
+        //team.external.Store store =
+        //    Application.applicationContext.getBean(team.external.StoreService.class)
+        //    .getStore(/** mapping value needed */);
 
     }
 
@@ -94,7 +92,7 @@ public class Order  {
 
 
 
-    public void cancelOrder(){
+    public void cancelOrder(CancelOrderCommand cancelOrderCommand){
         OrderCancelled orderCancelled = new OrderCancelled(this);
         orderCancelled.publishAfterCommit();
 

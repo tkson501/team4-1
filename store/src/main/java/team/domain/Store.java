@@ -4,8 +4,6 @@ import team.domain.FlowerSold;
 import team.StoreApplication;
 import javax.persistence.*;
 import java.util.List;
-import java.util.Optional;
-
 import lombok.Data;
 import java.util.Date;
 
@@ -55,8 +53,6 @@ public class Store  {
     
     private Boolean isOffline;
 
-    private Boolean isOffline;
-
     @PostPersist
     public void onPostPersist(){
 
@@ -73,7 +69,7 @@ public class Store  {
 
 
 
-    public void wrap(){
+    public void wrap(WrapCommand wrapCommand){
         FlowerWrapped flowerWrapped = new FlowerWrapped(this);
         flowerWrapped.publishAfterCommit();
 
@@ -81,20 +77,13 @@ public class Store  {
 
     public static void ifOnlineOrder(PaymentCompleted paymentCompleted){
 
-        /** Example 1:  new item */
+        /** Example 1:  new item 
         Store store = new Store();
-
-        store.setFlowerId(paymentCompleted.getFlowerId());
-        store.setFlowerCnt(paymentCompleted.getQty());
-        store.setOrderId(paymentCompleted.getOrderId());
-        store.setFlowerPrice(paymentCompleted.getPrice());        
-        store.setIsOffline(false);
-
         repository().save(store);
 
         FlowerWrapped flowerWrapped = new FlowerWrapped(store);
         flowerWrapped.publishAfterCommit();
-        
+        */
 
         /** Example 2:  finding and process
         
@@ -113,20 +102,13 @@ public class Store  {
     }
     public static void ifOfflineOrder(PaymentCompleted paymentCompleted){
 
-        /** Example 1:  new item */
-        Store store = new Store();       
-
-        //Optional<Store> flowerId = repository().findByFlowerId(paymentCompleted.getFlowerId());
-        store.setFlowerId(paymentCompleted.getFlowerId());
-        store.setFlowerCnt(paymentCompleted.getQty());
-        store.setOrderId(paymentCompleted.getOrderId());
-        store.setFlowerPrice(paymentCompleted.getPrice());
-        store.setIsOffline(true);
-
+        /** Example 1:  new item 
+        Store store = new Store();
         repository().save(store);
 
         FlowerSold flowerSold = new FlowerSold(store);
         flowerSold.publishAfterCommit();
+        */
 
         /** Example 2:  finding and process
         

@@ -17,19 +17,46 @@ public class Payment  {
     
     @Id
     @GeneratedValue(strategy=GenerationType.AUTO)
-   
+    
+    
+    
+    
     
     private Long id;
     
+    
+    
+    
+    
     private Long flowerId;
+    
+    
+    
+    
     
     private Double price;
     
+    
+    
+    
+    
     private Date payDate;
+    
+    
+    
+    
     
     private String cardNo;
     
+    
+    
+    
+    
     private Long orderId;
+    
+    
+    
+    
     
     private Integer qty;
     
@@ -45,13 +72,14 @@ public class Payment  {
     
     private Boolean isOffline;
 
-    private String status;
-
     @PostPersist
     public void onPostPersist(){
 
+
         PaymentCompleted paymentCompleted = new PaymentCompleted(this);
         paymentCompleted.publishAfterCommit();
+
+
 
         PaymentCanceled paymentCanceled = new PaymentCanceled(this);
         paymentCanceled.publishAfterCommit();
@@ -74,7 +102,7 @@ public class Payment  {
 
         PaymentCanceled paymentCanceled = new PaymentCanceled(payment);
         paymentCanceled.publishAfterCommit();
-
+        */
 
         /** Example 2:  finding and process
         
@@ -88,21 +116,7 @@ public class Payment  {
 
          });
         */
-      
-        PaymentCanceled paymentCanceled = new PaymentCanceled();
 
-        
-        paymentCanceled.setId(null);
-        paymentCanceled.setFlowerId(orderCancelled.getFlowerId());
-        paymentCanceled.setPrice(orderCancelled.getPrice());
-        paymentCanceled.setPayDate(orderCancelled.getOrderDate());
-        paymentCanceled.setCardNo(null);
-        paymentCanceled.setOrderId(orderCancelled.getId());
-        paymentCanceled.setQty(orderCancelled.getQty());
-        paymentCanceled.setStatus("CANCELED");
-       
-
-        
         
     }
     public static void pay(OrderPlaced orderPlaced){
@@ -114,17 +128,6 @@ public class Payment  {
         PaymentCompleted paymentCompleted = new PaymentCompleted(payment);
         paymentCompleted.publishAfterCommit();
         */
-        Payment payment = new Payment();
-        payment.setFlowerId(orderPlaced.getFlowerId());
-        payment.setPrice(orderPlaced.getPrice());
-        payment.setPayDate(orderPlaced.getOrderDate());
-        payment.setCardNo(null);
-        payment.setOrderId(orderPlaced.getId();
-        payment.setQty(orderPlaced.getQty());
-        payment.setStatus("PAYED");
-        
-        repository().save(payment);
-
 
         /** Example 2:  finding and process
         

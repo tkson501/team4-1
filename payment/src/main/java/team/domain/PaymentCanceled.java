@@ -25,9 +25,4 @@ public class PaymentCanceled extends AbstractEvent {
     public PaymentCanceled(){
         super();
     }
-    public PaymentCanceled findByOrderId(Long id2) {
-        return null;
-    }
-    public void setStatus(String string) {
-    }
 }
